@@ -1,0 +1,32 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+
+[ghq]
+  root = ~/Workspaces
+
+[fetch]
+  prune = true
+
+[init]
+	defaultBranch = main
+
+[core]
+  excludesfile = ~/.gitignore_global
+
+[pull]
+  rebase = true
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[credential "https://github.com"]
+  helper =
+  helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+  helper =
+  helper = !gh auth git-credential

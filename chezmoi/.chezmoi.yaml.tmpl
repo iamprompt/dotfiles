@@ -1,0 +1,19 @@
+{{- $name := "Supakarn Laorattanakul" -}}
+{{- $email := "wearedprompt@gmail.com" -}}
+{{- $github_user := "iamprompt" -}}
+{{- $passphrase := default "change me with 'SETPASS=1 chezmoi init'" (index . "passphrase") -}}
+
+{{- if (env "SETPASS") }}
+{{    $passphrase = promptString "Encryption Passphrase" $passphrase -}}
+{{- end }}
+
+data:
+  name: {{ $name | quote }}
+  email: {{ $email | quote }}
+  github_user: {{ $github_user | quote }}
+  passphrase: {{ $passphrase | quote }}
+
+encryption: gpg
+gpg:
+  symmetric: true
+  args: ["--batch", "--passphrase", {{ $passphrase | quote }}, "--no-symkey-cache", "--quiet"]

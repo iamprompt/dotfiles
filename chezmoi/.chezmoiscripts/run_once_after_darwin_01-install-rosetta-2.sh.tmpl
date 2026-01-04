@@ -1,0 +1,23 @@
+{{- if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") -}}
+#!/bin/sh
+
+# We don't need Rosetta 2 anymore I suppose
+exit 0
+
+# Install Rosetta 2"
+
+source /tmp/chezmoi-utils.sh
+
+printf "${green}[01 - macOS] ${reset}"
+{{- if or (lt 01 (atoi (env "SCRIPTS_START_AT"))) (env "SKIP_FISH_INSTALL") }}
+echo "Skip installing Rosetta 2"
+exit 0
+{{ else }}
+echo "Install Rosetta 2"
+{{- end }}
+
+set -eufo pipefail
+
+sudo softwareupdate --install-rosetta
+
+{{ end -}}
