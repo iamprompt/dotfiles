@@ -13,16 +13,6 @@ echo "Install Mac App Store apps via mas"
 
 set -ufo pipefail
 
-{{- if not (eq .computer_name "iamprompt") }}
-mas account &> /dev/null
-
-if [[ $? -ne 0 ]]; then
-  echo "Please login to Mac app store first, then run command again"
-  mas open
-  exit 0
-fi
-{{- end }}
-
 brew bundle --file=/dev/stdin <<EOF
 
 mas "LINE", id: 539883307
